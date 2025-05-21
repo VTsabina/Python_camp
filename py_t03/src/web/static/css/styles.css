@@ -1,0 +1,203 @@
+html,
+body {
+    background-color: rgb(37, 37, 37);
+    color: white;
+}
+
+.mainmenu {
+    list-style: none;
+    height: 60px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    background-color: black;
+    border: 5px solid transparent;
+    border-image: linear-gradient(to right, #562a83, #01EFAC) 1;
+    transition: border-image-source 0.5s ease;
+    font-size: 20px;
+    overflow: hidden;
+    /* Скрываем все, что выходит за пределы меню */
+    position: relative;
+    /* Добавлено для правильного позиционирования псевдоэлемента */
+}
+
+.mainmenu li {
+    margin: 18px 40px 0 50px;
+}
+
+.mainmenu a {
+    font-weight: bold;
+    /* Жирный текст */
+    /* font-size: 24px; Размер шрифта (можно изменить по желанию) */
+    background: linear-gradient(to right, #01EFAC, #00BFFF);
+    /* Градиент от бирюзового к голубому */
+    -webkit-background-clip: text;
+    /* Обрезка фона по тексту для WebKit-браузеров */
+    background-clip: text;
+    /* Стандартное свойство для других браузеров */
+    -webkit-text-fill-color: transparent;
+    /* Прозрачный цвет текста для WebKit-браузеров */
+    /* text-fill-color: transparent; Стандартное свойство для других браузеров (не поддерживается во всех) */
+    position: relative;
+    /* Для позиционирования псевдоэлемента */
+    text-decoration: none;
+    padding: 15px 20px;
+}
+
+/* Псевдоэлемент для блика */
+.mainmenu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    /* Начинаем слева за пределами меню */
+    width: 100%;
+    /* Занимаем всю ширину меню */
+    height: 100%;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+}
+
+/* Анимация блика при наведении на меню */
+.mainmenu:hover::before {
+    animation: shine 1.5s forwards;
+    /* Запускаем анимацию при наведении */
+}
+
+@keyframes shine {
+    from {
+        left: -100%;
+        /* Начинаем слева за пределами меню */
+    }
+
+    to {
+        left: 100%;
+        /* Двигаемся вправо за пределы меню */
+    }
+}
+
+.mainmenu a:hover {
+    color: #2082A6;
+    /* Цвет текста при наведении на ссылку */
+}
+
+.mainmenu:hover {
+    border-image-source: linear-gradient(to right, #01EFAC, #562a83);
+    /* Изменение границы при наведении на меню */
+}
+
+.game-container {
+    display: flex;
+    /* Используем Flexbox для размещения элементов */
+}
+
+#gameboard {
+    margin-right: 20px;
+    /* Отступ справа от таблицы */
+}
+
+.btn {
+    width: 100px;
+    height: 100px;
+    padding-top: 0;
+    font-size: 70px;
+    text-align: center;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    color: #01EFAC;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0px #019e87,
+        1px 2px 0px #019e87,
+        1px 3px 0px #019e87,
+        1px 4px 0px #019e87,
+        1px 5px 0px #019e87,
+        1px 6px 0px #019e87,
+        1px 10px 5px rgba(16, 16, 16, 0.5),
+        1px 10px 5px rgba(16, 16, 16, 0.4),
+        1px 10px 5px rgba(16, 16, 16, 0.3),
+        1px 10px 5px rgba(16, 16, 16, 0.2);
+    transition: 0.5s;
+    background-size: 200% auto;
+    background-image: linear-gradient(to right, #524094 0%, #2082A6 51%, #524094 100%);
+}
+
+.btn:hover {
+    width: 100px;
+    height: 100px;
+    padding-top: 0;
+    font-size: 70px;
+    background-position: right center;
+}
+
+.content-container {
+    display: flex;
+    /* Используем Flexbox для размещения элементов */
+    align-items: center;
+    /* Выравнивание по центру по вертикали */
+}
+
+.left-image {
+    width: 316px;
+    height: 318px;
+    margin-right: 20px;
+    /* Отступ справа от изображения */
+}
+
+.text-content {
+    flex: 1;
+    /* Занимает оставшееся пространство */
+}
+
+.another_btn {
+    color: black;
+    /* Цвет текста */
+    border: none;
+    /* Убираем рамку */
+    padding: 15px 32px;
+    /* Отступы внутри кнопки */
+    text-align: center;
+    /* Выравнивание текста по центру */
+    text-decoration: none;
+    /* Убираем подчеркивание */
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    display: inline-block;
+    /* Позволяет задавать размеры кнопки */
+    font-size: 20px;
+    /* Размер шрифта */
+    margin: 4px 2px;
+    /* Отступы вокруг кнопки */
+    cursor: pointer;
+    /* Курсор при наведении */
+    border-radius: 5px;
+    /* Закругленные углы */
+    transition: 0.5s;
+    background-size: 200% auto;
+    background-position: left center;
+    background-image: linear-gradient(to right, #524094 0%, #019e87 51%, #524094 100%);
+}
+
+.another_btn a {
+    color: black;
+    text-decoration: none;
+}
+
+.another_btn:hover {
+    color: black;
+    text-decoration: none;
+    background-size: 200% auto;
+    background-position: right center;
+    /* Цвет фона при наведении */
+    transform: scale(1.05);
+    /* Увеличение размера кнопки при наведении */
+}
+
+.another_btn:active {
+    color: black;
+    text-decoration: none;
+    transform: scale(0.95);
+    /* Уменьшение размера кнопки при нажатии */
+}
