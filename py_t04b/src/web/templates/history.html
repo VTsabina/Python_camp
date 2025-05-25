@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="content-container">
+    <img src="{{ url_for('static', filename='images/terni_lapilli.png') }}" alt="Terni-lapilli" class="left-image">
+    <div class="text-content">
+        <h3>History of the game</h3>
+        <p>Games played on three-in-a-row boards can be traced back to ancient Egypt, where such game boards have
+            been found on roofing tiles dating from around 1300 BC.</p>
+
+        <p>An early variation of tic-tac-toe was played in the Roman Empire, around the first century BC. It was called
+            terni lapilli (three pebbles at a time) and instead of having any number of pieces, each player had only
+            three; thus, they had to move them around to empty spaces to keep playing.</p>
+
+        <p>The different names of the game are more recent. The first print reference to "noughts and crosses" (nought
+            being an alternative word for 'zero'), the British name, appeared in 1858, in an issue of Notes and
+            Queries. The first print reference to a game called "tick-tack-toe" occurred in 1884. The US renaming
+            of "noughts and crosses" to "tic-tac-toe" occurred in the 20th century.</p>
+
+        <p>In 1952, OXO (or Noughts and Crosses), developed by British computer scientist Sandy Douglas for the EDSAC
+            computer at the University of Cambridge, became one of the first known video games. The computer
+            player could play perfect games of tic-tac-toe against a human opponent.</p>
+
+        <p></p>In 1975, tic-tac-toe was also used by MIT students to demonstrate the computational power of Tinkertoy
+        elements. The Tinkertoy computer, made out of (almost) only Tinkertoys, is able to play tic-tac-toe
+        perfectly.[15] It is currently on display at the Computer History Museum.</p>
+    </div>
+</div>
+{% endblock %}

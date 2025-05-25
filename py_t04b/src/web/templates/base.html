@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link type="text/css" href="{{ url_for('static', filename='css/styles.css')}}" rel="stylesheet" />
+
+    {% block title -%}
+    {% if title %}
+    <title>Tic-Tac-Toe - {{ title }}</title>
+    {% else %}
+    <title>Tic-Tac-Toe</title>
+    {% endif %}
+    {% endblock %}
+</head>
+
+<body>
+    {% block content -%}
+    {%- block mainmenu -%}
+    <ul class="mainmenu">
+        {% for elem in mainmenu -%}
+        <li><a href="{{ elem.url }}">{{ elem.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endblock mainmenu -%}
+    {% if title -%}
+    <h1>{{ title }}</h1>
+    {% else -%}
+    <h1>Tic-Tac-Toe</h1>
+    {% endif -%}
+    {% endblock -%}
+</body>
+
+</html>

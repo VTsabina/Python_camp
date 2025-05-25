@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div>
+    <div>
+        <h1>Server is resting...</h1>
+        {% if error %}
+        <h3>{{ error }}</h3>
+        {% endif %}
+        <h3>Our server is tired right now, and it needs some time to get better. Check out later, we'll be back soon!
+        </h3>
+
+    </div>
+</div>
+{% endblock %}
