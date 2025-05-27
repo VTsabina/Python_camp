@@ -3,7 +3,8 @@ from flask import render_template
 
 menu = [{'name': 'About', 'url': '/'},
         {'name': 'Play', 'url': '/game'},
-        {'name': 'History', 'url': '/history'}]
+        {'name': 'History', 'url': '/history'},
+        {'name': 'Login', 'url': '/login'}]
 
 class GameWeb:
     def __init__(self, id, board, player, winner):

@@ -18,11 +18,11 @@ def main_paige():
     return render_template('index.html', mainmenu=menu)
 
 @app.route('/register', methods=['GET', 'POST'])
-def registration():
+def register():
     pass
 
 @app.route('/login', methods=['GET', 'POST'])
-def autorization():
+def login():
     pass
 
 @app.route('/profile/<user_id>', methods=['GET', 'POST'])
