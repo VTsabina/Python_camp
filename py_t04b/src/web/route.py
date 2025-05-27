@@ -19,11 +19,11 @@ def main_paige():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    pass
+    return render_template('register.html', mainmenu=menu)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    pass
+    return render_template('login.html', mainmenu=menu)
 
 @app.route('/profile/<user_id>', methods=['GET', 'POST'])
 def show_profile(user_id):
@@ -31,7 +31,7 @@ def show_profile(user_id):
 
 @app.route('/create_game', methods=['GET', 'POST'])
 def choose_mode():
-    pass
+    return render_template('create_game.html', mainmenu=menu)
 
 @app.route('/join', methods=['GET', 'POST'])
 def join_game():
