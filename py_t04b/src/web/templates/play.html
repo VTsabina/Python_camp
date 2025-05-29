@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div>
+    <div>
+        <h1>Wanna play?</h1>
+
+        <button class="another_btn" type="button"><a href='/create_game'>New game</a></button>
+
+        <button class="another_btn" type="button"><a href='/join'>Join game</a></button>
+
+    </div>
+</div>
+{% endblock %}

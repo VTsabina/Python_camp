@@ -2,7 +2,7 @@
 from flask import render_template
 
 menu = [{'name': 'About', 'url': '/'},
-        {'name': 'Play', 'url': '/game'},
+        {'name': 'Play', 'url': '/play'},
         {'name': 'History', 'url': '/history'},
         {'name': 'Login', 'url': '/login'}]
 

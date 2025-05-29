@@ -27,7 +27,7 @@ def login():
 
 @app.route('/profile/<user_id>', methods=['GET', 'POST'])
 def show_profile(user_id):
-    pass
+    return render_template('profile.html', mainmenu=menu)
 
 @app.route('/create_game', methods=['GET', 'POST'])
 def choose_mode():
@@ -36,6 +36,10 @@ def choose_mode():
 @app.route('/join', methods=['GET', 'POST'])
 def join_game():
     pass
+
+@app.route('/play', methods=['GET', 'POST'])
+def play_game():
+    return render_template('play.html', mainmenu=menu)
 
 @app.route('/game')
 def get_uuid():
