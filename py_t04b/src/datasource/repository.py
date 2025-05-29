@@ -1,10 +1,10 @@
 # Repository for current games
 from .mapper import MapperDatasource
-from collections import defaultdict
 from threading import Lock
+from werkzeug.security import check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String, JSON
+from sqlalchemy import String, JSON, select
 
 db = SQLAlchemy()
 
@@ -15,7 +15,7 @@ class GameModel(db.Model):
     board: Mapped[dict] = mapped_column(JSON)
     current_player: Mapped[str] = mapped_column(String)
 
-class Users(db.Model):
+class UserModel(db.Model):
     __tablename__ = 'users'
     
     id: Mapped[str] = mapped_column(String, primary_key=True)
@@ -52,4 +52,31 @@ class Repository:
     def get_keys(self):
         with self.lock:
             return [game.id for game in GameModel.query.all()]
-        
+    
+    def add_user(self, request):
+        user = MapperDatasource.request_to_user(request)
+        res = False
+        with self.lock:
+            new_user = UserModel(
+                id=user.id,
+                username=user.login,
+                psw=user.psw
+            )
+            db.session.add(new_user)
+            res = True
+            db.session.commit()
+        return res
+    
+    def get_user(self, logdata):
+        pair = MapperDatasource.decode_base64(logdata)
+        login, psw = pair.split(':', 1)
+        with self.lock:
+            query = select(UserModel).where(UserModel.username == login)
+            res = db.session.execute(query).scalar_one_or_none()
+            if res:
+                if check_password_hash(res.psw, psw):
+                    return res.id
+                else:
+                    return None
+            else:
+                return None

@@ -14,15 +14,25 @@ app = Flask(__name__)
 #TODO: add ai and pvp games, add states (FSM?), sign info (?)
 
 @app.route('/', methods=['GET'])
-def main_paige():
+def main_page():
     return render_template('index.html', mainmenu=menu)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'POST':
+        res = container.auth.register(MapperWeb.generate_request(request.form['name'], request.form['psw']))
+        if res:
+            return redirect(url_for('login'))
     return render_template('register.html', mainmenu=menu)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        res = container.auth.autorize(MapperWeb.to_base64(request.form['name'], request.form['psw']))
+        if res:
+            return redirect(url_for('show_profile', user_id=res))
+        else:
+            return redirect(url_for('main_page'))
     return render_template('login.html', mainmenu=menu)
 
 @app.route('/profile/<user_id>', methods=['GET', 'POST'])

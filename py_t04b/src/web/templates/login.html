@@ -5,9 +5,13 @@
 <div>
     <div>
         <h1>Login</h1>
-
-        <h2>Don't have a profile yet?</h2>
-        <h2><a href='/register'>Register now!</a></h2>
+        <form action="/login" method="post">
+            <p><label>Login: </label> <input type="text" name="name" value="" required /></p>
+            <p><label>Password: </label> <input type="text" name="psw" value="" required /></p>
+            <p><input type="submit" value="Log in" />
+        </form>
+        <p>Don't have a profile yet?</p>
+        <button class="another_btn" type="button"><a href='/register'>Register now!</a></button>
     </div>
 </div>
 {% endblock %}

@@ -1,6 +1,8 @@
 # Mapper domain<->datasource
+import base64
+from uuid import uuid4
 from domain.model import Game
-from .model import GameDatasource
+from .model import GameDatasource, User
 
 class MapperDatasource:
 
@@ -17,3 +19,15 @@ class MapperDatasource:
     def datasource_to_domain(cls, datasource_model):
         data = datasource_model
         return Game(id=data.id, board=data.board, player=data.current_player)
+    
+    @classmethod
+    def request_to_user(cls, request):
+        id = uuid4()
+        login = request.login
+        psw = request.psw
+        return User(id, login, psw)
+    
+    @classmethod
+    def decode_base64(cls, logdata):
+        bytes = base64.b64decode(logdata)
+        return bytes.decode('utf-8')
