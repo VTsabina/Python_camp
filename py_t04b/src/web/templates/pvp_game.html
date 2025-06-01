@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="{{ url_for('static', filename='css/styles.css')}}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="game-container">
+        <table border="1" cellspacing="0" id="gameboard">
+            {% for row in range(gameboard|length) %}
+            <tr>
+                {% for col in range(gameboard[row]|length) %}
+                <td>
+                    <button class="btn" data-row="{{ row }}" data-col="{{ col }}">{{ gameboard[row][col] }}</button>
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="text-content">
+            <h3>Current player: <span id="current-player">{{ current_player }}</span></h3>
+            <h3>Player 1: <span id="current-player">{{ player1 }}</span></h3>
+            <h3>Player 2: <span id="current-player">{{ player2 }}</span></h3>
+            {% if winner %}
+            <h3>Winner: {{ winner }}</h3>
+            <button class="another_btn" type="button"><a href="/game">Try again</a></button>
+
+            {% endif %}
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('.btn').click(function () {
+                    var row = $(this).data('row');
+                    var col = $(this).data('col');
+                    var gameId = "{{ id }}"; // Получите ID игры
+
+                    $.ajax({
+                        url: '/game/' + gameId,
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ move: [row, col] }),
+                        success: function (data) {
+                            // Обновите игровое поле
+                            updateGameboard(data.board);
+                            // Обновите текущего игрока
+                            $('#current-player').text(data.current_player);
+                            // Update after computer
+                            window.location.href = '/game/' + gameId;
+                        },
+                        error: function (xhr) {
+                            alert(xhr.responseJSON.error);
+                        }
+                    });
+                });
+            });
+
+            function updateGameboard(board) {
+                $('#gameboard tr').each(function (rowIndex) {
+                    $(this).find('td').each(function (colIndex) {
+                        $(this).find('.btn').text(board[rowIndex][colIndex]);
+                    });
+                });
+            }
+        </script>
+</body>
+
+{% endblock %}

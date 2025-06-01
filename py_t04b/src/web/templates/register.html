@@ -5,6 +5,9 @@
 <div>
     <div>
         <h1>Registration</h1>
+        {% for msg in get_flashed_messages() %}
+        <div class="error-message">{{ msg }}</div>
+        {% endfor %}
         <form action="/register" method="post">
             <p><label>Name: </label> <input type="text" name="name" value="" required /></p>
             <p><label>Password: </label> <input type="text" name="psw" value="" required /></p>

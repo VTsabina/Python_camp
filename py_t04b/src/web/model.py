@@ -4,7 +4,8 @@ from flask import render_template
 menu = [{'name': 'About', 'url': '/'},
         {'name': 'Play', 'url': '/play'},
         {'name': 'History', 'url': '/history'},
-        {'name': 'Login', 'url': '/login'}]
+        {'name': 'Login', 'url': '/login'},
+        {'name': 'Profile', 'url': '/profile/<user_id>'}]
 
 class GameWeb:
     def __init__(self, id, board, player, winner):
@@ -26,9 +27,3 @@ class GameWeb:
     
     def switch_player(self):
         self.current_player = 'O' if self.current_player == 'X' else 'X'
-
-
-class UserAuthenticator:
-
-    def validate():
-        pass

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div>
+    <div>
+        <h1>Please, choose X or O</h1>
+
+        <button class="another_btn" type="button"><a href='/play_x'>X</a></button>
+
+        <button class="another_btn" type="button"><a href='/play_o'>O</a></button>
+    </div>
+</div>
+{% endblock %}

@@ -4,7 +4,8 @@ from threading import Lock
 from werkzeug.security import check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String, JSON, select
+from sqlalchemy import String, Integer, Date, JSON, select, delete
+from datetime import date
 
 db = SQLAlchemy()
 
@@ -19,8 +20,10 @@ class UserModel(db.Model):
     __tablename__ = 'users'
     
     id: Mapped[str] = mapped_column(String, primary_key=True)
-    username: Mapped[str] = mapped_column(String)
-    psw: Mapped[str] = mapped_column(String)
+    username: Mapped[str] = mapped_column(String, unique=True, nullable=True)
+    psw: Mapped[str] = mapped_column(String, nullable=True)
+    reg_date: Mapped[date] = mapped_column(Date, default=date.today, nullable=False)
+    win: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
 
 class Repository:
     def __init__(self):
@@ -48,6 +51,14 @@ class Repository:
             if not game_record:
                 return None
             return MapperDatasource.datasource_to_domain(game_record)
+        
+    def remove_game(self, game_id):
+        with self.lock:
+            item = GameModel.query.get(game_id)
+            if item:
+                stmt = delete(GameModel).where(GameModel.id == game_id)
+                db.session.execute(stmt)
+                db.session.commit()
 
     def get_keys(self):
         with self.lock:
@@ -80,3 +91,6 @@ class Repository:
                     return None
             else:
                 return None
+            
+    def get_user_info(self, user_id):
+        return UserModel.query.get(user_id)

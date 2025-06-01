@@ -4,7 +4,13 @@
 {{ super() }}
 <div>
     <div>
-        <h1>Username</h1>
+        <h1>Player: {{ user.username }}</h1>
+
+        <h3>Registration date: {{ user.reg_date }}</h3>
+
+        <h3>Winner in: {{ user.win }} games</h3>
+
+        <button class="another_btn" type="button"><a href='/logout'>Log out</a></button>
     </div>
 </div>
 {% endblock %}
